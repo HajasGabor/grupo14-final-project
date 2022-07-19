@@ -1,0 +1,270 @@
+<div class="container" *ngIf="currentUser">
+  <div class="p-2">
+    <h2 class="mb-3 text-center text-dark">
+      Welcome !
+    </h2>
+
+    <div class="list-group">
+      <ul class="videos">
+        <ul>
+          <h2>Videos</h2>
+        </ul>
+        <ul id="categories" *ngFor="let category of categories">
+          <h4 class="text-secondary category">{{ category.name }}</h4>
+          <li
+            class="list-group-item list-group-item-info"
+            id="videos"
+            *ngFor="let video of videos | category: category.id"
+          >
+            <div class="video-description">
+              <span class="name"
+                ><strong >Name:</strong> <input [(ngModel)]="video.videoName" /></span
+              >
+              <span class="url strong"> <strong> URL: </strong></span>
+              <input [(ngModel)] ="video.url" />
+              <button  class="btn btn-primary mx-2" (click)="removeVideo(video.videoId)">Delete</button>
+              <button  [id]="'updateButton' + video.id"  class="btn btn-primary mx-2" (click)="updateVideo(video)">Update</button>
+            </div>
+          </li>
+        </ul>
+
+        <ul>
+          <h2>Categories</h2>
+          <li
+            class="list-group-item list-group-item-info"
+            id="videos"
+            *ngFor="let category of categories"
+          >
+            <div class="video-description">
+              <span class="name"
+                ><strong>Name:</strong> <input [(ngModel)]="category.name" /></span
+              >
+
+              <!--TO-DO delete button -->
+              <button class="btn btn-primary mx-2" (click)="removeCategory(category.id)">
+                Delete
+              </button>
+              <!--TO-DO update form-->
+              <button class="btn btn-primary mx-2" (click)="updateCategory(category)">
+                Update
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <ul>
+          <h2>Users</h2>
+          <li
+            class="list-group-item list-group-item-info"
+            id="videos"
+            *ngFor="let user of users"
+          >
+            <div class="video-description">
+              <span class="name mr-2"
+                ><strong>email:</strong> <input [(ngModel)]="user.email" /></span
+              >
+              <span class="name mr-2"
+                ><strong>isAdmin:</strong> <input [(ngModel)]="user.isAdmin" /></span
+              >
+              <span class="name"
+                ><strong>Name:</strong> <input [(ngModel)]="user.name" /></span
+              >
+              <button class="btn btn-primary mx-2" (click)="removeUser(user.id)">
+                Delete
+              </button>
+              <!--TO-DO update form-->
+              <button class="btn btn-primary mx-2" (click)="updateUser(user)">
+                Update
+              </button>
+            </div>
+          </li>
+        </ul>
+
+        <form
+          name="addVideoForm"
+          (ngSubmit)="a.form.valid && addVideo()"
+          #a="ngForm"
+          novalidate
+        >
+          <ul class="form-row mt-3">
+            <h4 class="text-secondary category">Add video</h4>
+          </ul>
+          <ul class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="title"
+                [(ngModel)]="addVideoForm.title"
+                required
+                #title="ngModel"
+                placeholder="Video title"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="title.errors && a.submitted"
+              >
+                Title is required!
+              </div>
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="url"
+                [(ngModel)]="addVideoForm.url"
+                required
+                #url="ngModel"
+                placeholder="Video url"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="url.errors && a.submitted"
+              >
+                Url is required!
+              </div>
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="category"
+                [(ngModel)]="addVideoForm.category"
+                required
+                #category="ngModel"
+                placeholder="Category"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="category.errors && a.submitted"
+              >
+                Category is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary mx-2 btn-block">Add video</button>
+            </div>
+          </ul>
+        </form>
+
+        <form
+          name="addUserForm"
+          (ngSubmit)="q.form.valid && addUser()"
+          #q="ngForm"
+          novalidate
+        >
+          <ul class="form-row">
+            <h4 class="text-secondary category">Add user</h4>
+          </ul>
+          <ul class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="email"
+                [(ngModel)]="addUserForm.email"
+                required
+                #email="ngModel"
+                placeholder="Email"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="email.errors && q.submitted"
+              >
+                Email is required!
+              </div>
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="password"
+                [(ngModel)]="addUserForm.password"
+                required
+                #password="ngModel"
+                placeholder="Password"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="password.errors && q.submitted"
+              >
+                Password is required!
+              </div>
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="isAdmin"
+                [(ngModel)]="addUserForm.isAdmin"
+                required
+                #isAdmin="ngModel"
+                placeholder="isAdmin"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="isAdmin.errors && q.submitted"
+              >
+                IsAdmin is required!
+              </div>
+            </div>
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                [(ngModel)]="addUserForm.name"
+                required
+                #name="ngModel"
+                placeholder="Name"
+              />
+              <div
+                class="alert alert-danger"
+                role="alert"
+                *ngIf="name.errors && q.submitted"
+              >
+                Name is required!
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary mx-2 btn-block">Add user</button>
+            </div>
+          </ul>
+        </form>
+
+        <form
+          name="addCategoryForm"
+          (ngSubmit)="f.form.valid && addCategory()"
+          #f="ngForm"
+          novalidate
+        >
+          <ul class="form-row">
+            <h4 class="text-secondary category">Add category</h4>
+          </ul>
+          <ul class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                [(ngModel)]="addCategoryForm.name"
+                required
+                #name="ngModel"
+                placeholder="Name"
+              />
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary mx-2 btn-block">Add category</button>
+            </div>
+          </ul>
+        </form>
+      </ul>
+    </div>
+  </div>
+</div>

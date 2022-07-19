@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>{{ title }}</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <style>
+      body {
+    padding-bottom: 100px;
+    }
+      .login-form {
+        width: 340px;
+        margin: 50px auto;
+        font-size: 15px;
+      }
+      .login-form form {
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+      }
+      .login-form h2 {
+        margin: 0 0 15px;
+      }
+      .form-control,
+      .btn {
+        min-height: 38px;
+        border-radius: 2px;
+      }
+      .btn {
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      footer {
+        position: fixed;
+        margin-top: auto;
+        left: 0px;
+        bottom: 0px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+	<nav class="navbar navbar-light mb-3 py-3" 
+	  style="background-image: url('https://matra-agro.hu/wp-content/uploads/2019/11/cropped-Background-Header-1-scaled.jpg');
+	  background-size: 100% auto">
+		<button class="astext" (click)="router.navigate(['/videos']);"><h1 class="h1 text-light">{{ title }}</h1></button>
+    <button  class="btn btn-outline-secondary text-light" *ngIf="isAdmin" (click)="admin()">Admin panel</button>
+		<button  class="btn btn-outline-secondary text-light" *ngIf="isLoggedIn" (click)="logout()">Log out</button>
+	</nav>
+    
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+
+    <footer class="text-center text-lg-start bg-light text-muted">
+      <div class="container text-center text-md-start mt-1">
+        <div class="row mt-1">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Bence Szabo</h6>
+            <p>szabobence2k@gmail.com</p>
+          </div>
+
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Gabor Mate Hajas</h6>
+            <p>hajasgabor99@gmail.com</p>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

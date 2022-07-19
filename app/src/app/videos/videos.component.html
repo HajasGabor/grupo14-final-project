@@ -1,0 +1,28 @@
+<div class="container" *ngIf="currentUser">
+  <div class="p-2">
+    <h2 class="mb-3 text-center text-dark">
+      Welcome !
+    </h2>
+
+    <div class="list-group">
+      <ul class="videos">
+        <ul id="categories" *ngFor="let category of categories">
+          <h4 class="text-secondary category">{{ category.name }}</h4>
+          <li
+            class="list-group-item list-group-item-info"
+            id="videos"
+            *ngFor="let video of videos | category: category.id"
+          >
+            <div class="video-description">
+              <span class="name"
+                ><strong>Name:</strong> {{ video.videoName }}</span
+              >
+              <span class="url strong"> <strong> URL: </strong></span
+              ><a href="{{ video.url }}" class="url">{{ video.url }}</a>
+            </div>
+          </li>
+        </ul>
+      </ul>
+    </div>
+  </div>
+</div>
